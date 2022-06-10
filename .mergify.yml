@@ -1,0 +1,22 @@
+---
+pull_request_rules:
+  - name: automatic merge
+    conditions:
+      - and: &base_checks
+        - base=master
+        - -label~=^acceptance-tests-needed|not-ready
+        - "status-success~=test"
+        - "status-success~=style"
+      - and:
+        - "#approved-reviews-by>=1"
+        - "#changes-requested-reviews-by=0"
+        # https://doc.mergify.io/examples.html#require-all-requested-reviews-to-be-approved
+        - "#review-requested=0"
+    actions: &merge
+      merge:
+        method: merge
+  - name: automatic merge on special label
+    conditions:
+      - and: *base_checks
+      - "label=merge-fast"
+    actions: *merge
