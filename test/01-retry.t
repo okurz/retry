@@ -13,22 +13,20 @@ PATH=$BASHLIB$PATH
 
 source bash+ :std
 use Test::More
-plan tests 9
+plan tests 10
 
 PATH=$dir/..:$PATH
 
 ok "$(retry)" 'retry without parameter is ok'
 like "$(retry --help)" usage: 'retry help is shown'
 ok $? 'calling help returns success'
-set +e
-out=$(retry --unknown-option 2>&1); rc=$?
-set -e
+set +e; out=$(retry --unknown-option 2>&1); rc=$?; set -e
 is $rc 1 'calling with unknown option returns failure'
 like "$out" 'unrecognized option.*usage:' 'retry help is shown for unknown option'
 ok "$(retry true)" 'successful command returns success'
 is "$(retry true)" '' 'successful command does not show any output by default'
-set +e
-out=$(retry -s 0 false 2>&1); rc=$?
-set -e
-like "$out" 'Retrying up to 3 more.*Retrying up to 0' 'failing command retries'
+set +e; out=$(retry -s 0 false 2>&1); rc=$?; set -e
+like "$out" 'Retrying up to 3 more.*Retrying up to 1' 'failing command retries'
 is $rc 1 'failing command returns no success'
+set +e; out=$(retry -s 0 -r 1 -- sh -c 'echo -n .; false' 2>/dev/null); set -e
+is "$out" '..' 'specified number of tries (1+retries)'
