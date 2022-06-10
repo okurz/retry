@@ -28,7 +28,6 @@ Url:            https://github.com/okurz/retry
 %if %{with tests}
 BuildRequires:  perl git-core checkbashisms
 %endif
-Requires:
 
 %description
 A simply retry tool in plain POSIX sh.
