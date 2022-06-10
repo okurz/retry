@@ -32,7 +32,7 @@ sleep="${sleep:-3}"
 
 until "$@"; do
     [ "$retries" -ge 0 ] || break
-    echo "Retrying up to $retries more times after sleeping ${sleep}s …"
+    echo "Retrying up to $retries more times after sleeping ${sleep}s …" >&2
     retries=$((retries-1))
     sleep "$sleep"
 done
