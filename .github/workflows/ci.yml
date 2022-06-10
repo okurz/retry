@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: unit tests
         run: |
-         make test
+         make test-unit
 
   style:
     runs-on: ubuntu-latest
@@ -17,5 +17,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Static checks
         run: |
-         sudo apt-get install yamllint shellcheck
+         sudo apt-get install shellcheck
+         export PATH=.:$PATH
          make checkstyle
