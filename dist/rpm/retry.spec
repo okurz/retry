@@ -27,7 +27,7 @@ BuildArch:      noarch
 Url:            https://github.com/okurz/retry
 Source0:        %{name}-%{version}.tar.xz
 %if %{with tests}
-BuildRequires:  perl git-core checkbashisms
+BuildRequires:  perl git-core ShellCheck checkbashisms
 %endif
 
 %description
