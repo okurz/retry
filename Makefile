@@ -28,7 +28,7 @@ test-shellcheck:
 	shellcheck -x $$(file --mime-type * | sed -n 's/^\(.*\):.*text\/x-shellscript.*$$/\1/p')
 
 .PHONY: test-checkbashisms
-test-checkbashisms: checkbashisms
+test-checkbashisms:
 	@command -v checkbashisms >/dev/null 2>&1 || echo "Command 'checkbashisms' not found, can not execute shell script checks"
 	checkbashisms -x $$(file --mime-type * | sed -n 's/^\(.*\):.*text\/x-shellscript.*$$/\1/p')
 
