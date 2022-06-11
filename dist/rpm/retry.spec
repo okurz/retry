@@ -25,6 +25,7 @@ License:        MIT
 Group:          Development/Tools/Other
 BuildArch:      noarch
 Url:            https://github.com/okurz/retry
+Source0:        %{name}-%{version}.tar.xz
 %if %{with tests}
 BuildRequires:  perl git-core checkbashisms
 %endif
@@ -33,6 +34,7 @@ BuildRequires:  perl git-core checkbashisms
 A simply retry tool in plain POSIX sh.
 
 %prep
+%setup -q
 
 %build
 
