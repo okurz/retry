@@ -34,4 +34,4 @@ test-checkbashisms: checkbashisms
 
 .PHONY: install
 install:
-	install -m 755 retry "$(DESTDIR)"/bin/retry
+	install -m 755 retry "$(DESTDIR)"/usr/bin/retry

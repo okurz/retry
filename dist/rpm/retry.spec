@@ -39,6 +39,7 @@ A simply retry tool in plain POSIX sh.
 %build
 
 %install
+mkdir -p %{buildroot}%{_bindir}
 %make_install
 
 %check
