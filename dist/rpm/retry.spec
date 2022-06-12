@@ -15,8 +15,6 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-%bcond_without tests
-
 Name:           retry
 Version:        1
 Release:        0
@@ -26,9 +24,6 @@ Group:          Development/Tools/Other
 BuildArch:      noarch
 Url:            https://github.com/okurz/retry
 Source0:        %{name}-%{version}.tar.xz
-%if %{with tests}
-BuildRequires:  perl git-core ShellCheck checkbashisms
-%endif
 
 %description
 A simply retry tool in plain POSIX sh.
@@ -43,9 +38,6 @@ mkdir -p %{buildroot}%{_bindir}
 %make_install
 
 %check
-%if %{with tests}
-make test
-%endif
 
 %files
 %{_bindir}/retry
