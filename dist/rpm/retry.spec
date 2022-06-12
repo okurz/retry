@@ -18,7 +18,7 @@
 Name:           retry
 Version:        1
 Release:        0
-Summary:        A simply retry tool in plain POSIX sh
+Summary:        A simple tool for retrying command executions in plain POSIX sh
 License:        MIT
 Group:          Development/Tools/Other
 BuildArch:      noarch
@@ -26,7 +26,7 @@ Url:            https://github.com/okurz/retry
 Source0:        %{name}-%{version}.tar.xz
 
 %description
-A simply retry tool in plain POSIX sh.
+A simple tool for retrying command executions in plain POSIX sh.
 
 %prep
 %setup -q
