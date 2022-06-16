@@ -3,7 +3,7 @@ pull_request_rules:
   - name: automatic merge
     conditions:
       - and: &base_checks
-        - base=master
+        - base=main
         - -label~=^acceptance-tests-needed|not-ready
         - "status-success~=test"
         - "status-success~=style"
