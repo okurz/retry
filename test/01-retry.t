@@ -13,7 +13,7 @@ PATH=$BASHLIB$PATH
 
 source bash+ :std
 use Test::More
-plan tests 10
+plan tests 12
 
 PATH=$dir/..:$PATH
 
@@ -27,6 +27,9 @@ ok "$(retry true)" 'successful command returns success'
 is "$(retry true)" '' 'successful command does not show any output by default'
 set +e; out=$(retry -s 0 false 2>&1); rc=$?; set -e
 like "$out" 'Retrying up to 3 more.*Retrying up to 1' 'failing command retries'
+is $rc 1 'failing command returns no success'
+set +e; out=$(retry -s 1 -e -r 2 false 2>&1); rc=$?; set -e
+like "$out" 'sleeping 1s.*sleeping 2s' 'sleep amount doubles'
 is $rc 1 'failing command returns no success'
 set +e; out=$(retry -s 0 -r 1 -- sh -c 'echo -n .; false' 2>/dev/null); set -e
 is "$out" '..' 'specified number of tries (1+retries)'
