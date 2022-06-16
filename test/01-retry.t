@@ -17,6 +17,9 @@ plan tests 12
 
 PATH=$dir/..:$PATH
 
+sleep() { :;}
+export -f sleep
+
 ok "$(retry)" 'retry without parameter is ok'
 like "$(retry --help)" usage: 'retry help is shown'
 ok $? 'calling help returns success'
@@ -25,11 +28,11 @@ is $rc 1 'calling with unknown option returns failure'
 like "$out" 'unrecognized option.*usage:' 'retry help is shown for unknown option'
 ok "$(retry true)" 'successful command returns success'
 is "$(retry true)" '' 'successful command does not show any output by default'
-set +e; out=$(retry -s 0 false 2>&1); rc=$?; set -e
+set +e; out=$(retry false 2>&1); rc=$?; set -e
 like "$out" 'Retrying up to 3 more.*Retrying up to 1' 'failing command retries'
 is $rc 1 'failing command returns no success'
 set +e; out=$(retry -s 1 -e -r 2 false 2>&1); rc=$?; set -e
 like "$out" 'sleeping 1s.*sleeping 2s' 'sleep amount doubles'
 is $rc 1 'failing command returns no success'
-set +e; out=$(retry -s 0 -r 1 -- sh -c 'echo -n .; false' 2>/dev/null); set -e
+set +e; out=$(retry -r 1 -- sh -c 'echo -n .; false' 2>/dev/null); set -e
 is "$out" '..' 'specified number of tries (1+retries)'
