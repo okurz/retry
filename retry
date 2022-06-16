@@ -6,7 +6,8 @@ options:
     -h,--help               Show this help
     -r,--retries=RETRIES    How many retries to do on command failure after the
                             initial try. Defaults to 3.
-    -s,--sleep=SLEEP        How many seconds to sleep between retries
+    -s,--sleep=SLEEP        How many seconds to sleep between retries. Defaults
+                            to 3 seconds.
     "
     exit "$1"
 }
