@@ -24,6 +24,7 @@ Group:          Development/Tools/Other
 BuildArch:      noarch
 Url:            https://github.com/okurz/retry
 Source0:        %{name}-%{version}.tar.xz
+Requires:       util-linux
 
 %description
 A simple tool for retrying command executions in plain POSIX sh.
