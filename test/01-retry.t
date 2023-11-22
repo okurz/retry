@@ -13,7 +13,7 @@ PATH=$BASHLIB$PATH
 
 source bash+ :std
 use Test::More
-plan tests 12
+plan tests 14
 
 PATH=$dir/..:$PATH
 
@@ -36,3 +36,7 @@ like "$out" 'sleeping 1s.*sleeping 2s' 'sleep amount doubles'
 is $rc 1 'failing command returns no success'
 set +e; out=$(retry -r 1 -- sh -c 'echo -n .; false' 2>/dev/null); set -e
 is "$out" '..' 'specified number of tries (1+retries)'
+set +e; out=$(retry -r 0 false 2>&1); rc=$?; set -e
+is $rc 1 'failing command without retry returns no success'
+set +e; out=$(retry -r 0 true 2>&1); rc=$?; set -e
+is $rc 0 'passing command without retry returns no error'
