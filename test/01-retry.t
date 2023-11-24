@@ -13,7 +13,7 @@ PATH=$BASHLIB$PATH
 
 source bash+ :std
 use Test::More
-plan tests 14
+plan tests 15
 
 PATH=$dir/..:$PATH
 
@@ -40,3 +40,6 @@ set +e; out=$(retry -r 0 false 2>&1); rc=$?; set -e
 is $rc 1 'failing command without retry returns no success'
 set +e; out=$(retry -r 0 true 2>&1); rc=$?; set -e
 is $rc 0 'passing command without retry returns no error'
+trap "rm -f 'run_count.txt'" EXIT
+set +e; out=$(retry -r 2 $dir/success_on_third.sh 2>&1); rc=$?; set -e
+is $rc 0 'pass on last run is success'
