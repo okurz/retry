@@ -5,7 +5,7 @@
 fails="${fails:-0}"
 runs="${runs:-"20"}"
 start="${start:-1}"
-timing="${timing:-0}"
+timing="${timing:-1}"
 if [ "$timing" = 1 ]; then t_start=$(date +%s%N); fi
 declare -a times=()
 for ((i=start; i <= runs; i++)); do
