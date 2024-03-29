@@ -15,7 +15,7 @@ test-more-bash:
 
 checkbashisms:
 	@command -v wget >/dev/null 2>&1 || echo "Command 'wget' not found, can not download checkbashisms"
-	wget -q https://salsa.debian.org/debian/devscripts/-/raw/master/scripts/checkbashisms.pl -O checkbashisms
+	wget -q https://salsa.debian.org/debian/devscripts/-/raw/main/scripts/checkbashisms.pl -O checkbashisms
 	chmod +x checkbashisms
 	command -v checkbashisms >/dev/null || echo "Downloaded checkbashisms. You can check the file and add to PATH, then call make again"
 
