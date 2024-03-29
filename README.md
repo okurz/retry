@@ -103,6 +103,11 @@ make test
 make checkstyle
 ```
 
+## Alternatives
+
+* https://github.com/minfrin/retry - an older C implementation which is also
+  available in Debian and Ubuntu.
+
 ## License
 
 This project is licensed under the MIT license, see LICENSE file for details.
