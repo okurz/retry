@@ -42,5 +42,6 @@ mkdir -p %{buildroot}%{_bindir}
 
 %files
 %{_bindir}/retry
+%{_bindir}/count-fail-ratio
 
 %changelog
