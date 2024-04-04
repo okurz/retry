@@ -17,7 +17,7 @@ options:
 
 # parse arguments
 opts=$(getopt \
-    --options h,r:,s:,e:: \
+    --options +h,r:,s:,e:: \
     --longoptions help,retries:,sleep:,exponential:: \
     --name "$(basename "$0")" -- "$@") || usage 1
 
