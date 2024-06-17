@@ -5,7 +5,8 @@ usage() {
 options:
     -h,--help                   Show this help
     -r,--retries=RETRIES        How many retries to do on command failure after
-                                the initial try. Defaults to 3.
+                                the initial try. Set -1 for infinite retries.
+                                Defaults to 3.
     -s,--sleep=SLEEP            How many seconds to sleep between retries.
                                 Defaults to 3 seconds.
     -e,--exponential[=FACTOR]   Enable simple exponential back-off algorithm.
@@ -38,13 +39,18 @@ retries="${retries:-3}"
 sleep="${sleep:-3}"
 
 ret=0
+retries_msg=""
 while true; do
     ret=0
     "$@" && exit
     ret=$?
-    [ "$retries" -gt 0 ] || break
-    echo "Retrying up to $retries more times after sleeping ${sleep}s …" >&2
-    retries=$((retries-1))
+    if [ "$retries" = 0 ]; then
+        break
+    elif [ "$retries" != -1 ]; then
+        retries_msg="up to $retries more times "
+        retries=$((retries-1))
+    fi
+    echo "Retrying ${retries_msg}after sleeping ${sleep}s …" >&2
     sleep "$sleep"
     [ -n "$exponential" ] && sleep=$((sleep*exponential))
 done
