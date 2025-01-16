@@ -12,20 +12,19 @@ options:
                                 Disabled by default, factor defaults to 2
                                 (binary exponential back-off).
     "
-    exit "$1"
 }
 
 # parse arguments
 opts=$(getopt \
     --options +h,r:,s:,e:: \
     --longoptions help,retries:,sleep:,exponential:: \
-    --name "$(basename "$0")" -- "$@") || usage 1
+    --name "$(basename "$0")" -- "$@") || { usage ; exit 1; }
 
 eval set -- "$opts"
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    -h | --help        ) usage 0; shift ;;
+    -h | --help        ) usage; exit 0 ;;
     -r | --retries     ) retries=$2; shift 2 ;;
     -s | --sleep       ) sleep=$2; shift 2 ;;
     -e | --exponential ) exponential=${2:-2}; shift 2 ;;
