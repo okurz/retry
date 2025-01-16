@@ -11,7 +11,7 @@ declare -a times=()
 for ((i=start; i <= runs; i++)); do
     echo "## Run $i"
     if [ "$timing" = 1 ]; then t_run_start=$(date +%s%N); fi
-    $* || fails=$((fails+1))
+    "$@" || fails=$((fails+1))
     if [ "$timing" = 1 ]; then
         t_run_end=$(date +%s%N)
         runtime=$(( (t_run_end - t_run_start) / 1000000 ))
